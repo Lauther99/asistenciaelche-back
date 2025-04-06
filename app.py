@@ -6,7 +6,7 @@ from face_detection import embeddings, liveness, extract_best_frame
 import uuid
 from fastapi import FastAPI, File, Form, UploadFile, status, HTTPException, Header
 import shutil
-from settings.settings import ChromaDBSetup
+from settings import ChromaDBSetup
 from database.manager import add_embedding_to_collection, search_embedding
 from fastapi.responses import JSONResponse
 from google_scripts.manager import (
@@ -20,7 +20,7 @@ from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.base import BaseHTTPMiddleware
 from typing import Optional
-from settings.settings import JWT_SECRET_KEY, JWT_ALGORITHM
+from settings import JWT_SECRET_KEY, JWT_ALGORITHM
 import jwt
 import pytz
 from datetime import datetime, timedelta
