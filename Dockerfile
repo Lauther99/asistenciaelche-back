@@ -1,4 +1,4 @@
-FROM python:3.11.5
+FROM python:3.11-slim
 
 # Evitar input interactivo
 ENV DEBIAN_FRONTEND=noninteractive
@@ -29,4 +29,5 @@ EXPOSE 8080
 # Comando de arranque
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8080"]
 
-# docker run --env JWT_SECRET_KEY=mi_secreto_firme --env JWT_ALGORITHM=HS256 app-backend
+# docker run -p 8080:8080 --env JWT_SECRET_KEY=mi_secreto_firme --env JWT_ALGORITHM=HS256 --env ALLOWED_ORIGINS="*,https://myexample.com" app-backend
+
