@@ -187,7 +187,7 @@ class BioRegisterRequest(BaseModel):
 
 
 @app.post("/v1/verify-bio")
-def update_assistance_endpoint(request: BioRegisterRequest):
+def verify_bio(request: BioRegisterRequest):
     try:
         data = request.model_dump()
         response_data = get_user_data(data)
@@ -195,15 +195,17 @@ def update_assistance_endpoint(request: BioRegisterRequest):
         if response_data["status"] == "success":
             print("Data obtenida:", response_data["content"])
 
+            content = {
+                "status": "success",
+                "content": {
+                    "dni": response_data["content"]["dni"],
+                    "nombre": response_data["content"]["nombre"],
+                },
+            }
+            print("Contenido de la respuesta:", content)
             return JSONResponse(
                 status_code=status.HTTP_200_OK,
-                content={
-                    "status": "success",
-                    "content": {
-                        "dni": response_data["content"]["dni"],
-                        "nombre": response_data["content"]["nombre"],
-                    },
-                },
+                content=content,
             )
         else:
             return JSONResponse(
