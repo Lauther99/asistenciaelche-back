@@ -26,6 +26,7 @@ import pytz
 from datetime import datetime, timedelta
 
 app = FastAPI()
+base_dir = os.path.dirname(os.path.abspath(__file__))
 
 app.add_middleware(
     CORSMiddleware,
@@ -56,6 +57,8 @@ def register_endpoint(
         if response_data["status"] == "success":
             if foto:
                 photo_path = f"./temp/{rand}.jpg"
+                photo_path = os.path.join(base_dir, photo_path)
+                
                 with open(photo_path, "wb") as buffer:
                     shutil.copyfileobj(foto.file, buffer)
 
@@ -115,8 +118,11 @@ def verify_endpoint(video: UploadFile = File(...)):
         os.makedirs("./temp", exist_ok=True)
 
         temp_video_path = f"./temp/{rand}-video.mp4"
+        temp_video_path = os.path.join(base_dir, temp_video_path)
+        
         temp_frame_path = f"./temp/{rand}-frame.jpg"
-
+        temp_frame_path = os.path.join(base_dir, temp_frame_path)
+        
         with open(temp_video_path, "wb") as buffer:
             shutil.copyfileobj(video.file, buffer)
 
