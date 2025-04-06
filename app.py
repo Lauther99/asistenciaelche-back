@@ -20,7 +20,7 @@ from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.base import BaseHTTPMiddleware
 from typing import Optional
-from settings import JWT_SECRET_KEY, JWT_ALGORITHM
+from settings import JWT_SECRET_KEY, JWT_ALGORITHM, ALLOWED_ORIGINS
 import jwt
 import pytz
 from datetime import datetime, timedelta
@@ -29,7 +29,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
