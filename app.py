@@ -48,6 +48,9 @@ def register_endpoint(
     id_key_pass: Optional[str] = File(None),
     foto: Optional[UploadFile] = File(None),
 ):
+    tmp_path = os.path.join(base_dir, 'tmp')
+    os.makedirs(tmp_path, exist_ok=True)
+    
     rand = uuid.uuid4().hex
 
     try:
@@ -56,7 +59,7 @@ def register_endpoint(
 
         if response_data["status"] == "success":
             if foto:
-                photo_path = f"./temp/{rand}.jpg"
+                photo_path = f"./tmp/{rand}.jpg"
                 photo_path = os.path.join(base_dir, photo_path)
                 
                 with open(photo_path, "wb") as buffer:
@@ -113,14 +116,16 @@ def register_endpoint(
 
 @app.post("/v1/verify")
 def verify_endpoint(video: UploadFile = File(...)):
+    tmp_path = os.path.join(base_dir, 'tmp')
+    os.makedirs(tmp_path, exist_ok=True)
+    
     try:
         rand = uuid.uuid4().hex
-        os.makedirs("./temp", exist_ok=True)
 
-        temp_video_path = f"./temp/{rand}-video.mp4"
+        temp_video_path = f"./tmp/{rand}-video.mp4"
         temp_video_path = os.path.join(base_dir, temp_video_path)
         
-        temp_frame_path = f"./temp/{rand}-frame.jpg"
+        temp_frame_path = f"./tmp/{rand}-frame.jpg"
         temp_frame_path = os.path.join(base_dir, temp_frame_path)
         
         with open(temp_video_path, "wb") as buffer:

@@ -7,8 +7,12 @@ env = environ.Env()
 environ.Env.read_env()
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
-filename = os.path.join(base_dir, "../database/collections/frames_collection")
 
+filename = os.path.join(base_dir, "../database/collections/frames_collection")
+tmp_path = os.path.join(base_dir, 'tmp')
+
+os.makedirs(tmp_path, exist_ok=True)
+os.makedirs(filename, exist_ok=True)
 
 class ChromaDBSetup:
     _collections = {}
