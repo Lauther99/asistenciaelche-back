@@ -1,6 +1,6 @@
 import requests
 
-base_url = "https://script.google.com/macros/s/AKfycbw9w9Bc8ZdEuTexMZORywI5Mf7n2q2QLv0luU4v9Dfdccc-96cDUHDLhuy996Q8C5nc/exec"
+base_url = "https://script.google.com/macros/s/AKfycby6o7Q7C_pVxLaC5hmkYmhasJtuyBM-wbL6zbbUk76zM3nsYcH1DdgjdsV51xDTkq-x/exec"
 
 def register_workers(user_data):
     register_url = base_url
