@@ -54,3 +54,4 @@ class ChromaDBSetup:
 JWT_SECRET_KEY: str = env("JWT_SECRET_KEY")
 JWT_ALGORITHM: str = env("JWT_ALGORITHM") or "HS256"
 ALLOWED_ORIGINS: list[str] = env("ALLOWED_ORIGINS").split(',') if env("ALLOWED_ORIGINS") else ["*"]
+GOOGLE_SCRIPTS_ENDPOINT: str = env("GOOGLE_SCRIPTS_ENDPOINT")
